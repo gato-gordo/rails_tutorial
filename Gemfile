@@ -8,8 +8,11 @@ gem 'rails', '4.0.8'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
-#	gem 'sqlite3', '1.3.8'
+	gem 'guard-rspec', '2.5.0'
 	gem 'rspec-rails', '2.13.1'
+ 	gem 'spork-rails', '4.0.0'
+  	gem 'guard-spork', '1.5.0'
+  	gem 'childprocess', '0.3.6'
 end
 
 group :test do
@@ -46,7 +49,6 @@ end
 gem 'pg', '0.15.1'
 
 group :production do
-#  gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
 
