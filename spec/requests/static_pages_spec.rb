@@ -1,52 +1,31 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-  describe "Home Page" do
-    it "should have the right title 'Sample App | Home'" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-	 visit '/static_pages/home'
-      expect(page).to have_title('Sample App | Home')
-    end
 
-    it "should have the content 'Home' " do
-      visit '/static_pages/home'
-	 expect(page).to have_content('Home')
-    end
+  subject { page }
+
+  describe "Home Page" do
+    before { visit root_path }
+    it { should have_content 'Sample App' }
+    it { should have_title 'Ruby on Rails Tutorial Sample App' }
+    it { should_not have_title 'Home' }
   end
 
   describe "Help Page" do
-    it "should have the right title 'Sample App | Help'" do
-      visit '/static_pages/help'
-	 expect(page).to have_title('Sample App | Help')
-    end
-
-    it "should have the content 'Help'" do
-    	 visit '/static_pages/help'
-	 expect(page).to have_content('Help')
-    end
-
+    before { visit help_path }
+    it { should have_title 'Sample App | Help' }
+    it { should have_content 'Help' }
   end
-  describe "About Page" do
-    it "should have the right title 'Sample App | About'" do
-      visit '/static_pages/about'
-	 expect(page).to have_title('Sample App | About')
-    end
 
-    it "should have the content 'About'" do
-      visit '/static_pages/about'
-	 expect(page).to have_content('About')
-    end
+  describe "About Page" do
+    before { visit about_path }
+    it { should have_title 'Sample App | About' }
+    it { should have_content 'About' }
   end
 
   describe "Contact Page" do
-    it "should have the right title 'Sample App | Contact'" do
-      visit '/static_pages/contact'
-	 expect(page).to have_title('Contact')
-    end
-
-    it "should have the content 'Contact'" do
-      visit '/static_pages/contact'
-	 expect(page).to have_content('Contact')
-    end
+    before { visit contact_path }
+    it { should have_title 'Contact' }
+    it { should have_selector 'h1', text: 'Contact' }
   end
 end
