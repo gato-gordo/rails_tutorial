@@ -12,6 +12,7 @@ describe User do
   it { should respond_to :password_confirmation }
   it { should be_valid }
   it { should respond_to :authenticate }
+  it { should respond_to :remember_token }
 
   describe "when email is not present" do
     before { @user.email = " " }
@@ -91,6 +92,10 @@ describe User do
       specify { expect(user_for_invalid_password).to be_false }
     end
 
+    describe "remember token" do
+      before { @user.save }
+      its(:remember_token) { should_not be_blank }
+    end
   end
 =begin
   describe "when email is mixed-case" do
