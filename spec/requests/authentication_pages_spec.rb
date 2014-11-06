@@ -42,7 +42,7 @@ describe "Authentication" do
       end
     end
 
-  end
+  end #signin page
 
   describe "authorization" do
 
@@ -54,20 +54,21 @@ describe "Authentication" do
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
           it { should have_title('Sign in') }
-        end
+        end #visiting the edi
 
         describe "submitting to the update action" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
-        end
+        end #submitting
 
         describe "visiting the user index" do
           before { visit users_path }
           it { should have_title('Sign in') }
-        end
+        end #visiting user index
 
-      end
-    end
+      end #in the Users controller
+
+    end #for non-signed in users 
 
     describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
@@ -84,7 +85,7 @@ describe "Authentication" do
         before { patch user_path(wrong_user) }
         specify { expect(response).to redirect_to(root_url) }
       end
-    end
+    end #as wrong user
 
     describe "when attempting to visit a protected page" do
       let(:user) { FactoryGirl.create(:user) }
@@ -102,8 +103,21 @@ describe "Authentication" do
           expect(page).to have_title('Edit user')
         end
       end
-    end
 
-  end
+    end #when visiting protected page
+
+    describe "as non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+
+      before { sign_in non_admin, no_capybara: true }
+
+      describe "submitting a DELETE request to the Users#destroy action" do
+        before { delete user_path(user) }
+        specify { expect(response).to redirect_to(root_url) }
+      end
+    end # as non-admin user
+
+  end # authorizeation
 
 end
