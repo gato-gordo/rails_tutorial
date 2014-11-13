@@ -51,6 +51,10 @@ describe "Authentication" do
 
       describe "in the Users controller" do
 
+        it { should_not have_link('Profile', href: user_path(user) ) }
+        it { should_not have_link('Sign out', href: signout_path ) }
+        it { should_not have_link('Settings', href: edit_user_path(user) ) }
+
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
           it { should have_title('Sign in') }
@@ -98,7 +102,6 @@ describe "Authentication" do
       end
 
       describe "after signing in" do
-
         it "should render the desired protected page" do
           expect(page).to have_title('Edit user')
         end
@@ -117,7 +120,5 @@ describe "Authentication" do
         specify { expect(response).to redirect_to(root_url) }
       end
     end # as non-admin user
-
   end # authorizeation
-
 end
