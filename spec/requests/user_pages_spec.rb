@@ -66,8 +66,11 @@ describe "UserPages" do
   end
 
   describe "signup" do
-
-    before { visit signup_path }
+=begin
+    before do 
+      visit signout_path
+      visit signup_path
+    end
 
     let(:submit) { "Create my account" }
 
@@ -82,7 +85,7 @@ describe "UserPages" do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       it "should create a user" do
@@ -98,6 +101,7 @@ describe "UserPages" do
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
+=end
   end
 
   describe "edit page" do
